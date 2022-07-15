@@ -1,0 +1,57 @@
+.headerText {
+  font-size: 5rem;
+  text-align: center;
+}
+.container {
+  height: 53.5vh;
+  margin: 5rem 10rem;
+  display: flex;
+  justify-content: center;
+}
+.form {
+  display: flex;
+  width: 40%;
+  justify-content: flex-start;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.formLabel {
+  width: 100%;
+  display: block;
+  margin: 0.75rem 0rem;
+  font: 20px bold;
+}
+.textArea {
+  min-width: 100%;
+  max-width: 100%;
+  min-height: 10rem;
+  max-height: 10rem;
+}
+.formInput {
+  width: 100%;
+  padding: 0.7rem;
+  font-size: 20px;
+}
+.formInput:focus {
+  background-color: #97bbff4c;
+}
+@media only screen and (max-width: 1400px) {
+  .form {
+    margin: 20px;
+    min-width: 90%;
+  }
+}
+
+@media only screen and (max-width: 580px) {
+  .headerText {
+    font-size: 2.5rem;
+  }
+  .formLabel {
+    font: 20px normal;
+  }
+  .container {
+    margin: 0;
+    margin-bottom: 2.7rem;
+    min-width: 100vw;
+  }
+}

@@ -1,0 +1,23 @@
+.section2 {
+  position: relative;
+  height: 40vh;
+  background-color: rgb(60, 0, 172);
+}
+.wave .shapeFill {
+  fill: #f6f9fc;
+}
+.wave {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .section2 {
+    position: relative;
+    height: 25vh;
+  }
+}
