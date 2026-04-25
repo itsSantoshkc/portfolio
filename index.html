@@ -1,273 +1,994 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Santosh K.C. - Developer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=Instrument+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/e07ff84049.js"
+      crossorigin="anonymous"
+    ></script>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Santosh K.C. — Developer</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=Instrument+Sans:wght@400;500;600;700&display=swap"
-    rel="stylesheet" />
-  <script src="https://kit.fontawesome.com/e07ff84049.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="style.css">
-</head>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              cream: "#F5EFE0",
+              yellow: "#F2C94C",
+              orange: "#E07B39",
+              rust: "#A94A2C",
+              olive: "#6B7A3A",
+              brown: "#5C3D2E",
+              ink: "#1A1008",
+              sand: "#D4B896",
+            },
+            fontFamily: {
+              bebas: ['"Bebas Neue"', "sans-serif"],
+              serif: ['"DM Serif Display"', "serif"],
+              sans: ['"Instrument Sans"', "sans-serif"],
+            },
+            keyframes: {
+              marquee: {
+                from: { transform: "translateX(0)" },
+                to: { transform: "translateX(-50%)" },
+              },
+              scrollLine: {
+                "0%,100%": { transform: "scaleY(1)", opacity: "1" },
+                "50%": { transform: "scaleY(0.4)", opacity: "0.3" },
+              },
+              rotateSlow: {
+                from: { transform: "rotate(0deg)" },
+                to: { transform: "rotate(360deg)" },
+              },
+              fadeUp: {
+                from: { opacity: "0", transform: "translateY(30px)" },
+                to: { opacity: "1", transform: "translateY(0)" },
+              },
+            },
+            animation: {
+              marquee: "marquee 18s linear infinite",
+              scrollLine: "scrollLine 1.8s ease-in-out infinite",
+              rotateSlow: "rotateSlow 20s linear infinite",
+              fadeUp1: "fadeUp 0.6s ease 0.2s both",
+              fadeUp2: "fadeUp 0.8s ease 0.35s both",
+              fadeUp3: "fadeUp 0.7s ease 0.55s both",
+              fadeUp4: "fadeUp 0.7s ease 0.75s both",
+              fadeUp5: "fadeUp 0.7s ease 1s both",
+            },
+          },
+        },
+      };
+    </script>
 
-<body>
+    <style>
+      body {
+        cursor: none;
+      }
 
-  <!-- Cursor -->
-  <div class="cursor" id="cursor"></div>
-  <div class="cursor-follower" id="cursorFollower"></div>
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+        pointer-events: none;
+        z-index: 9000;
+        opacity: 0.5;
+      }
 
-  <!-- ====== NAV ====== -->
-  <nav>
-    <div class="nav-logo">SKC</div>
-    <ul>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>
+      .nav-link {
+        position: relative;
+        padding-bottom: 3px;
+      }
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: #e07b39;
+        transition: width 0.3s ease;
+      }
+      .nav-link:hover::after {
+        width: 100%;
+      }
 
-  <!-- ====== HERO ====== -->
-  <section id="hero"
-    style="max-width:100%;padding:120px 60px 80px;position:relative;overflow:hidden;min-height:100vh;display:flex;flex-direction:column;justify-content:center;">
-    <div class="hero-bg-circle c1"></div>
-    <div class="hero-bg-circle c2"></div>
+      .hero-outline {
+        -webkit-text-stroke: 2px #e07b39;
+        color: transparent;
+        transition: color 0.3s;
+      }
+      .hero-outline:hover {
+        color: #e07b39;
+      }
 
-    <!-- Rotating badge -->
-    <div class="sticker sticker-rotate" style="top:140px;right:80px;z-index:2;">
-      <svg viewBox="0 0 160 160" width="130" height="130">
-        <defs>
-          <path id="circle-text" d="M 80,80 m -55,0 a 55,55 0 1,1 110,0 a 55,55 0 1,1 -110,0" />
-        </defs>
-        <circle cx="80" cy="80" r="65" fill="var(--yellow)" stroke="var(--ink)" stroke-width="2.5" />
-        <text font-family="Bebas Neue, sans-serif" font-size="13" fill="var(--ink)" letter-spacing="5">
-          <textPath href="#circle-text">SOFTWARE DEVELOPER ✦ KATHMANDU ✦ </textPath>
-        </text>
-        <text x="80" y="88" text-anchor="middle" font-family="Bebas Neue, sans-serif" font-size="26"
-          fill="var(--ink)">★</text>
-      </svg>
-    </div>
+      /* CTA flood fill */
+      .cta-btn {
+        position: relative;
+        overflow: hidden;
+      }
+      .cta-btn::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: #e07b39;
+        transform: translateX(-101%);
+        transition: transform 0.3s ease;
+        z-index: 0;
+      }
+      .cta-btn:hover::after {
+        transform: translateX(0);
+      }
+      .cta-btn:hover {
+        color: #1a1008;
+        border-color: #e07b39;
+      }
+      .cta-btn > span {
+        position: relative;
+        z-index: 1;
+      }
 
-    <div class="hero-eyebrow">Available for work</div>
-    <h1 class="hero-name">
-      SANTOSH<br><span>K.C.</span>
-    </h1>
-    <p class="hero-subtitle">A Software Developer who builds things that <em>actually work.</em></p>
+      /* Hard drop shadow card */
+      .drop-card {
+        position: relative;
+        transition: transform 0.2s ease;
+      }
+      .drop-card::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        right: -5px;
+        width: 100%;
+        height: 100%;
+        background: #1a1008;
+        z-index: -1;
+        transition:
+          bottom 0.2s ease,
+          right 0.2s ease;
+      }
+      .drop-card:hover {
+        transform: translate(-4px, -4px);
+      }
+      .drop-card:hover::after {
+        bottom: -9px;
+        right: -9px;
+      }
 
-    <div class="hero-bottom">
-      <a href="#contact" class="hero-cta"><span>Get in touch →</span></a>
-      <div class="hero-socials">
-        <a href="https://www.linkedin.com/in/santosh-k-c-b923a2206/" target="_blank" title="LinkedIn">
-          <i class="fa-brands fa-linkedin"></i>
+      .drop-card-lg::after {
+        bottom: -6px;
+        right: -6px;
+      }
+      .drop-card-lg:hover {
+        transform: translate(-5px, -5px);
+      }
+      .drop-card-lg:hover::after {
+        bottom: -11px;
+        right: -11px;
+      }
+
+      /* Submit flood fill */
+      .submit-btn {
+        position: relative;
+        overflow: hidden;
+      }
+      .submit-btn::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: #e07b39;
+        transform: translateX(-101%);
+        transition: transform 0.3s ease;
+        z-index: 0;
+      }
+      .submit-btn:hover::after {
+        transform: translateX(0);
+      }
+      .submit-btn:hover {
+        color: #1a1008;
+        border-color: #e07b39;
+      }
+      .submit-btn > span {
+        position: relative;
+        z-index: 1;
+      }
+
+      .divider-banner {
+        position: relative;
+      }
+      .divider-banner::before {
+        content: "★ ★ ★";
+        position: absolute;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 0.85rem;
+        letter-spacing: 10px;
+        color: rgba(255, 255, 255, 0.2);
+      }
+
+      /* Scroll reveal */
+      .reveal {
+        opacity: 0;
+        transform: translateY(40px);
+        transition:
+          opacity 0.7s ease,
+          transform 0.7s ease;
+      }
+      .reveal.d1 {
+        transition-delay: 0.1s;
+      }
+      .reveal.d2 {
+        transition-delay: 0.2s;
+      }
+      .reveal.d3 {
+        transition-delay: 0.3s;
+      }
+      .reveal.d4 {
+        transition-delay: 0.4s;
+      }
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    </style>
+  </head>
+
+  <body class="bg-cream text-ink font-sans overflow-x-hidden">
+    <!-- Custom Cursor -->
+    <div
+      id="cursor"
+      class="fixed top-0 left-0 w-5 h-5 bg-orange rounded-full pointer-events-none z-[9999] -translate-x-1/2 -translate-y-1/2 transition-transform duration-100 mix-blend-multiply"
+    ></div>
+    <div
+      id="cursorFollower"
+      class="fixed top-0 left-0 w-11 h-11 border-2 border-brown rounded-full pointer-events-none z-[9998] -translate-x-1/2 -translate-y-1/2 transition-all duration-150"
+    ></div>
+
+    <!-- ====== NAV ====== -->
+    <nav
+      class="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-10 py-5 mix-blend-multiply"
+    >
+      <span class="font-bebas text-2xl text-brown tracking-widest"></span>
+      <ul class="hidden lg:flex gap-9 list-none">
+        <li>
+          <a
+            href="#skills"
+            class="nav-link text-xl font-bold tracking-widest text-brown no-underline"
+            >Skills</a
+          >
+        </li>
+        <li>
+          <a
+            href="#projects"
+            class="nav-link text-xl font-bold tracking-widest text-brown no-underline"
+            >Projects</a
+          >
+        </li>
+        <li>
+          <a
+            href="#contact"
+            class="nav-link text-xl font-bold tracking-widest text-brown no-underline"
+            >Contact</a
+          >
+        </li>
+      </ul>
+    </nav>
+
+    <!-- ====== HERO ====== -->
+    <section
+      id="hero"
+      class="min-h-screen flex flex-col justify-center px-10 lg:px-16 pt-32 pb-20 relative overflow-hidden"
+    >
+      <!-- BG blobs -->
+      <div
+        class="absolute w-[500px] h-[500px] rounded-full bg-yellow opacity-40 -top-20 -right-28 pointer-events-none"
+      ></div>
+      <div
+        class="absolute w-[300px] h-[300px] rounded-full bg-orange opacity-20 bottom-16 -left-20 pointer-events-none"
+      ></div>
+
+      <!-- Rotating badge -->
+      <div
+        class="absolute top-36 right-20 animate-rotateSlow pointer-events-none hidden lg:block"
+      >
+        <svg viewBox="0 0 160 160" width="130" height="130">
+          <defs>
+            <path
+              id="ct"
+              d="M 80,80 m -55,0 a 55,55 0 1,1 110,0 a 55,55 0 1,1 -110,0"
+            />
+          </defs>
+          <circle
+            cx="80"
+            cy="80"
+            r="65"
+            fill="#F2C94C"
+            stroke="#1A1008"
+            stroke-width="2.5"
+          />
+          <text
+            font-family="Bebas Neue,sans-serif"
+            font-size="13"
+            fill="#1A1008"
+            letter-spacing="5"
+          >
+            <textPath href="#ct">SOFTWARE DEVELOPER ✦ KATHMANDU ✦</textPath>
+          </text>
+          <text
+            x="80"
+            y="88"
+            text-anchor="middle"
+            font-family="Bebas Neue,sans-serif"
+            font-size="26"
+            fill="#1A1008"
+          >
+            ★
+          </text>
+        </svg>
+      </div>
+
+      <span
+        class="animate-fadeUp1 self-start text-[0.75rem] font-bold tracking-[0.2em] text-rust bg-yellow border border-rust px-3 py-1 rounded-sm mb-6"
+      >
+        Available for work
+      </span>
+
+      <h1
+        class="animate-fadeUp2 font-bebas leading-[0.92] tracking-wide relative z-10"
+        style="font-size: clamp(72px, 14vw, 180px)"
+      >
+        SANTOSH<br />
+        <span class="hero-outline">K.C.</span>
+      </h1>
+
+      <p
+        class="animate-fadeUp3 font-serif italic text-brown mt-6 max-w-lg"
+        style="font-size: clamp(1.2rem, 3vw, 2rem)"
+      >
+        A Software Developer who builds things that <em>actually work.</em>
+      </p>
+
+      <div
+        class="animate-fadeUp4 flex flex-col sm:flex-row items-start sm:items-center gap-6 mt-12"
+      >
+        <a
+          href="#contact"
+          class="cta-btn inline-block bg-ink text-cream border-2 border-ink px-8 py-4 text-xs font-bold tracking-[0.15em] no-underline transition-colors duration-200"
+        >
+          <span>Get in touch →</span>
         </a>
-        <a href="https://github.com/itsSantoshkc" target="_blank" title="GitHub">
-          <i class="fa-brands fa-github"></i>
-        </a>
-        <a href="mailto:santoshkc7786@gmail.com" title="Email">
-          <i class="fa-solid fa-envelope"></i>
-        </a>
-      </div>
-    </div>
-
-    <div class="hero-scroll">
-      Scroll
-      <div class="hero-scroll-line"></div>
-    </div>
-  </section>
-
-  <!-- ====== MARQUEE ====== -->
-  <div class="marquee-strip">
-    <div class="marquee-inner">
-      <span>React Js</span><span class="dot">✦</span>
-      <span>Next Js</span><span class="dot">✦</span>
-      <span>TypeScript</span><span class="dot">✦</span>
-      <span>Go</span><span class="dot">✦</span>
-      <span>Python</span><span class="dot">✦</span>
-      <span>Docker</span><span class="dot">✦</span>
-      <span>Kafka</span><span class="dot">✦</span>
-      <span>MongoDB</span><span class="dot">✦</span>
-      <span>PostgreSQL</span><span class="dot">✦</span>
-      <span>Tailwind</span><span class="dot">✦</span>
-      <!-- duplicate for seamless loop -->
-      <span>React Js</span><span class="dot">✦</span>
-      <span>Next Js</span><span class="dot">✦</span>
-      <span>TypeScript</span><span class="dot">✦</span>
-      <span>Go</span><span class="dot">✦</span>
-      <span>Python</span><span class="dot">✦</span>
-      <span>Docker</span><span class="dot">✦</span>
-      <span>Kafka</span><span class="dot">✦</span>
-      <span>MongoDB</span><span class="dot">✦</span>
-      <span>PostgreSQL</span><span class="dot">✦</span>
-      <span>Tailwind</span><span class="dot">✦</span>
-    </div>
-  </div>
-
-  <!-- ====== SKILLS ====== -->
-  <section id="skills">
-    <div class="section-label reveal">
-      <span class="section-label-num">01 /</span>
-      <h2>Skills</h2>
-      <div class="section-label-line"></div>
-    </div>
-    <div class="skills-grid">
-      <div class="skill-card reveal reveal-delay-1">
-        <img src="./assets/html.svg" alt="HTML" class="skill-icon" />
-        <span class="skill-name">HTML</span>
-      </div>
-      <div class="skill-card reveal reveal-delay-1">
-        <img src="./assets/css.svg" alt="CSS" class="skill-icon" />
-        <span class="skill-name">CSS</span>
-      </div>
-      <div class="skill-card reveal reveal-delay-2">
-        <img src="./assets/javascript.svg" alt="JavaScript" class="skill-icon" />
-        <span class="skill-name">JavaScript</span>
-      </div>
-      <div class="skill-card reveal reveal-delay-2">
-        <img src="./assets/typescript.svg" alt="TypeScript" class="skill-icon" />
-        <span class="skill-name">TypeScript</span>
-      </div>
-      <div class="skill-card reveal reveal-delay-1">
-        <img src="./assets/C.svg" alt="C" class="skill-icon" />
-        <span class="skill-name">C</span>
-      </div>
-      <div class="skill-card reveal reveal-delay-2">
-        <img src="./assets/java.svg" alt="Java" class="skill-icon" />
-        <span class="skill-name">Java</span>
-      </div>
-      <div class="skill-card reveal reveal-delay-3">
-        <img src="./assets/python.svg" alt="Python" class="skill-icon" />
-        <span class="skill-name">Python</span>
-      </div>
-      <div class="skill-card reveal reveal-delay-3">
-        <img src="./assets/go.svg" alt="Go" class="skill-icon" />
-        <span class="skill-name">Go</span>
-      </div>
-      <div class="skill-card reveal reveal-delay-1">
-        <img src="./assets/react.svg" alt="React Js" class="skill-icon" />
-        <span class="skill-name">React Js</span>
-      </div>
-      <div class="skill-card reveal reveal-delay-2">
-        <img src="./assets/nextjs.svg" alt="Next Js" class="skill-icon" />
-        <span class="skill-name">Next Js</span>
-      </div>
-      <div class="skill-card reveal reveal-delay-3">
-        <img src="./assets/tailwind.svg" alt="Tailwind" class="skill-icon" />
-        <span class="skill-name">Tailwind</span>
-      </div>
-      <div class="skill-card reveal reveal-delay-4">
-        <img src="./assets/docker.svg" alt="Docker" class="skill-icon" />
-        <span class="skill-name">Docker</span>
-      </div>
-      <div class="skill-card reveal reveal-delay-1">
-        <img src="./assets/mongo.svg" alt="MongoDB" class="skill-icon" />
-        <span class="skill-name">MongoDB</span>
-      </div>
-      <div class="skill-card reveal reveal-delay-2">
-        <img src="./assets/kafka.svg" alt="Kafka" class="skill-icon" />
-        <span class="skill-name">Kafka</span>
-      </div>
-      <div class="skill-card reveal reveal-delay-3">
-        <img src="./assets/postgres.svg" alt="PostgreSQL" class="skill-icon" />
-        <span class="skill-name">PostgreSQL</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ====== DIVIDER QUOTE ====== -->
-  <div class="divider-banner">
-    <p>"I don't just write code — I craft <strong>experiences</strong> that are fast, bold, and built to last."</p>
-  </div>
-
-  <!-- ====== PROJECTS ====== -->
-  <section id="projects">
-    <div class="section-label reveal">
-      <span class="section-label-num">02 /</span>
-      <h2>Projects</h2>
-      <div class="section-label-line"></div>
-    </div>
-    <div class="projects-grid">
-      <!-- E-Gallery -->
-      <div class="project-card reveal">
-        <img class="project-card-img"
-          src="https://images.unsplash.com/photo-1730459024772-5eed9b324e90?q=80&w=800&auto=format&fit=crop"
-          alt="E-Gallery project" />
-        <div class="project-card-body">
-          <div class="project-card-tags">
-            <span class="project-tag">Next Js</span>
-            <span class="project-tag">MySQL</span>
-            <span class="project-tag">Drizzle</span>
-          </div>
-          <h3 class="project-title">E-Gallery</h3>
-          <p class="project-desc">A full-featured digital gallery platform built with Next.js and MySQL. Showcases
-            artwork with smooth navigation and a clean, immersive browsing experience.</p>
-          <a href="#" class="project-link">
-            <i class="fa-brands fa-github"></i> View Source
+        <div class="flex gap-5">
+          <a
+            href="https://www.linkedin.com/in/santosh-k-c-b923a2206/"
+            target="_blank"
+            class="w-11 h-11 border-2 border-brown rounded-full flex items-center justify-center text-brown no-underline text-base transition-all duration-200 hover:bg-brown hover:text-cream hover:rotate-6 hover:scale-110"
+          >
+            <i class="fa-brands fa-linkedin"></i>
+          </a>
+          <a
+            href="https://github.com/itsSantoshkc"
+            target="_blank"
+            class="w-11 h-11 border-2 border-brown rounded-full flex items-center justify-center text-brown no-underline text-base transition-all duration-200 hover:bg-brown hover:text-cream hover:rotate-6 hover:scale-110"
+          >
+            <i class="fa-brands fa-github"></i>
+          </a>
+          <a
+            href="mailto:santoshkc7786@gmail.com"
+            class="w-11 h-11 border-2 border-brown rounded-full flex items-center justify-center text-brown no-underline text-base transition-all duration-200 hover:bg-brown hover:text-cream hover:rotate-6 hover:scale-110"
+          >
+            <i class="fa-solid fa-envelope"></i>
           </a>
         </div>
       </div>
 
-      <!-- Coming soon cards -->
-      <div class="project-card reveal reveal-delay-1">
-        <div class="project-coming">
-          <div class="coming-label">Coming Soon</div>
-          <div class="coming-sub">Next project in progress...</div>
+      <div
+        class="animate-fadeUp5 absolute bottom-9 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-60"
+      >
+        <span class="text-[0.65rem] font-bold tracking-[0.2em] text-brown"
+          >Scroll</span
+        >
+        <div class="w-px h-12 bg-brown animate-scrollLine"></div>
+      </div>
+    </section>
+
+    <!-- ====== MARQUEE ====== -->
+    <div
+      class="overflow-hidden border-y-[2.5px] border-ink bg-orange py-3 whitespace-nowrap"
+    >
+      <div class="inline-flex animate-marquee">
+        <span class="font-bebas text-2xl tracking-widest text-ink mx-9"
+          >React Js</span
+        ><span class="font-bebas text-2xl text-cream">✦</span>
+        <span class="font-bebas text-2xl tracking-widest text-ink mx-9"
+          >Next Js</span
+        ><span class="font-bebas text-2xl text-cream">✦</span>
+        <span class="font-bebas text-2xl tracking-widest text-ink mx-9"
+          >TypeScript</span
+        ><span class="font-bebas text-2xl text-cream">✦</span>
+        <span class="font-bebas text-2xl tracking-widest text-ink mx-9">Go</span
+        ><span class="font-bebas text-2xl text-cream">✦</span>
+        <span class="font-bebas text-2xl tracking-widest text-ink mx-9"
+          >Python</span
+        ><span class="font-bebas text-2xl text-cream">✦</span>
+        <span class="font-bebas text-2xl tracking-widest text-ink mx-9"
+          >Docker</span
+        ><span class="font-bebas text-2xl text-cream">✦</span>
+        <span class="font-bebas text-2xl tracking-widest text-ink mx-9"
+          >Kafka</span
+        ><span class="font-bebas text-2xl text-cream">✦</span>
+        <span class="font-bebas text-2xl tracking-widest text-ink mx-9"
+          >MongoDB</span
+        ><span class="font-bebas text-2xl text-cream">✦</span>
+        <span class="font-bebas text-2xl tracking-widest text-ink mx-9"
+          >PostgreSQL</span
+        ><span class="font-bebas text-2xl text-cream">✦</span>
+        <span class="font-bebas text-2xl tracking-widest text-ink mx-9"
+          >Tailwind</span
+        ><span class="font-bebas text-2xl text-cream">✦</span>
+        <span class="font-bebas text-2xl tracking-widest text-ink mx-9"
+          >React Js</span
+        ><span class="font-bebas text-2xl text-cream">✦</span>
+        <span class="font-bebas text-2xl tracking-widest text-ink mx-9"
+          >Next Js</span
+        ><span class="font-bebas text-2xl text-cream">✦</span>
+        <span class="font-bebas text-2xl tracking-widest text-ink mx-9"
+          >TypeScript</span
+        ><span class="font-bebas text-2xl text-cream">✦</span>
+        <span class="font-bebas text-2xl tracking-widest text-ink mx-9">Go</span
+        ><span class="font-bebas text-2xl text-cream">✦</span>
+        <span class="font-bebas text-2xl tracking-widest text-ink mx-9"
+          >Python</span
+        ><span class="font-bebas text-2xl text-cream">✦</span>
+        <span class="font-bebas text-2xl tracking-widest text-ink mx-9"
+          >Docker</span
+        ><span class="font-bebas text-2xl text-cream">✦</span>
+        <span class="font-bebas text-2xl tracking-widest text-ink mx-9"
+          >Kafka</span
+        ><span class="font-bebas text-2xl text-cream">✦</span>
+        <span class="font-bebas text-2xl tracking-widest text-ink mx-9"
+          >MongoDB</span
+        ><span class="font-bebas text-2xl text-cream">✦</span>
+        <span class="font-bebas text-2xl tracking-widest text-ink mx-9"
+          >PostgreSQL</span
+        ><span class="font-bebas text-2xl text-cream">✦</span>
+        <span class="font-bebas text-2xl tracking-widest text-ink mx-9"
+          >Tailwind</span
+        ><span class="font-bebas text-2xl text-cream">✦</span>
+      </div>
+    </div>
+
+    <!-- ====== SKILLS ====== -->
+    <section id="skills" class="max-w-6xl mx-auto px-10 py-24">
+      <div class="reveal flex items-center gap-4 mb-16">
+        <span class="font-bebas text-base text-orange tracking-[3px]"
+          >01 /</span
+        >
+        <h2
+          class="font-bebas text-ink"
+          style="font-size: clamp(2.5rem, 6vw, 5rem); line-height: 1"
+        >
+          Skills
+        </h2>
+        <div class="flex-1 h-0.5 bg-sand"></div>
+      </div>
+
+      <!-- Languages -->
+      <div class="reveal mb-4">
+        <span class="inline-flex items-center gap-3 mb-6">
+          <span class="font-bebas text-xl text-brown tracking-widest"
+            >Languages</span
+          >
+          <span class="flex-1 h-px w-16 bg-sand inline-block"></span>
+        </span>
+      </div>
+      <div
+        class="grid grid-cols-3 *:text-sand sm:grid-cols-5 lg:grid-cols-9 gap-4 mb-14"
+      >
+        <div
+          class="drop-card reveal d1 bg-white border-2 border-ink flex flex-col items-center gap-3 p-5"
+        >
+          <img
+            src="./assets/python.svg"
+            alt="Python"
+            class="w-12 h-12 object-contain"
+          />
+          <span class="text-[0.72rem] font-bold tracking-widest">Python</span>
+        </div>
+        <div
+          class="drop-card reveal d1 bg-white border-2 border-ink flex flex-col items-center gap-3 p-5"
+        >
+          <img
+            src="./assets/typescript.svg"
+            alt="TypeScript"
+            class="w-12 h-12 object-contain"
+          />
+          <span class="text-[0.72rem] font-bold tracking-widest"
+            >TypeScript</span
+          >
+        </div>
+        <div
+          class="drop-card reveal d2 bg-white border-2 border-ink flex flex-col items-center gap-3 p-5"
+        >
+          <img
+            src="./assets/java.svg"
+            alt="Java"
+            class="w-12 h-12 object-contain"
+          />
+          <span class="text-[0.72rem] font-bold tracking-widest text-sand"
+            >Java</span
+          >
+        </div>
+        <div
+          class="drop-card reveal d2 bg-white border-2 border-ink flex flex-col items-center gap-3 p-5"
+        >
+          <img
+            src="./assets/javascript.svg"
+            alt="JavaScript"
+            class="w-12 h-12 object-contain"
+          />
+          <span class="text-[0.72rem] font-bold tracking-widest text-sand"
+            >JavaScript</span
+          >
+        </div>
+        <div
+          class="drop-card reveal d2 bg-white border-2 border-ink flex flex-col items-center gap-3 p-5"
+        >
+          <img
+            src="./assets/csharp.svg"
+            alt="C#"
+            class="w-12 h-12 object-contain"
+          />
+          <span class="text-[0.72rem] font-bold tracking-widest text-sand"
+            >C#</span
+          >
+        </div>
+        <div
+          class="drop-card reveal d3 bg-white border-2 border-ink flex flex-col items-center gap-3 p-5"
+        >
+          <img src="./assets/C.svg" alt="C" class="w-12 h-12 object-contain" />
+          <span class="text-[0.72rem] font-bold tracking-widest text-sand"
+            >C</span
+          >
+        </div>
+        <div
+          class="drop-card reveal d3 bg-white border-2 border-ink flex flex-col items-center gap-3 p-5"
+        >
+          <img
+            src="./assets/php.svg"
+            alt="PHP"
+            class="w-12 h-12 object-contain"
+          />
+          <span class="text-[0.72rem] font-bold tracking-widest text-sand"
+            >PHP</span
+          >
+        </div>
+        <div
+          class="drop-card reveal d3 bg-white border-2 border-ink flex flex-col items-center gap-3 p-5"
+        >
+          <img
+            src="./assets/html.svg"
+            alt="HTML"
+            class="w-12 h-12 object-contain"
+          />
+          <span class="text-[0.72rem] font-bold tracking-widest">HTML</span>
+        </div>
+        <div
+          class="drop-card reveal d4 bg-white border-2 border-ink flex flex-col items-center gap-3 p-5"
+        >
+          <img
+            src="./assets/css.svg"
+            alt="CSS"
+            class="w-12 h-12 object-contain"
+          />
+          <span class="text-[0.72rem] font-bold tracking-widest">CSS</span>
         </div>
       </div>
-      <div class="project-card reveal reveal-delay-2">
-        <div class="project-coming">
-          <div class="coming-label">Coming Soon</div>
-          <div class="coming-sub">Stay tuned</div>
+
+      <!-- Frameworks & Libraries -->
+      <div class="reveal mb-4">
+        <span class="inline-flex items-center gap-3 mb-6">
+          <span class="font-bebas text-xl text-brown tracking-widest"
+            >Frameworks & Libraries</span
+          >
+          <span class="flex-1 h-px w-16 bg-sand inline-block"></span>
+        </span>
+      </div>
+      <div
+        class="grid grid-cols-3 sm:grid-cols-5 *:text-sand lg:grid-cols-7 gap-4 mb-14"
+      >
+        <div
+          class="drop-card reveal d1 bg-white border-2 border-ink flex flex-col items-center gap-3 p-5"
+        >
+          <img
+            src="./assets/react.svg"
+            alt="React Js"
+            class="w-12 h-12 object-contain"
+          />
+          <span class="text-[0.72rem] font-bold tracking-widest">React Js</span>
+        </div>
+        <div
+          class="drop-card reveal d1 bg-white border-2 border-ink flex flex-col items-center gap-3 p-5"
+        >
+          <img
+            src="./assets/nextjs.svg"
+            alt="Next Js"
+            class="w-12 h-12 object-contain"
+          />
+          <span class="text-[0.72rem] font-bold tracking-widest">Next Js</span>
+        </div>
+        <div
+          class="drop-card reveal d2 bg-white border-2 border-ink flex flex-col items-center gap-3 p-5"
+        >
+          <img
+            src="./assets/nestjs.svg"
+            alt="Nest JS"
+            class="w-12 h-12 object-contain"
+          />
+          <span class="text-[0.72rem] font-bold tracking-widest">Nest JS</span>
+        </div>
+        <div
+          class="drop-card reveal d2 bg-white border-2 border-ink flex flex-col items-center gap-3 p-5"
+        >
+          <img
+            src="./assets/django.svg"
+            alt="Django"
+            class="w-12 h-12 object-contain"
+          />
+          <span class="text-[0.72rem] font-bold tracking-widest">Django</span>
+        </div>
+        <div
+          class="drop-card reveal d2 bg-white border-2 border-ink flex flex-col items-center gap-3 p-5"
+        >
+          <img
+            src="./assets/fastapi.svg"
+            alt="FastAPI"
+            class="w-12 h-12 object-contain"
+          />
+          <span class="text-[0.72rem] font-bold tracking-widest">Fast API</span>
+        </div>
+        <div
+          class="drop-card reveal d3 bg-white border-2 border-ink flex flex-col items-center gap-3 p-5"
+        >
+          <img
+            src="./assets/spring.svg"
+            alt="Spring"
+            class="w-12 h-12 object-contain"
+          />
+          <span class="text-[0.72rem] font-bold tracking-widest">Spring</span>
+        </div>
+        <div
+          class="drop-card reveal d3 bg-white border-2 border-ink flex flex-col items-center gap-3 p-5"
+        >
+          <img
+            src="./assets/tailwind.svg"
+            alt="Tailwind"
+            class="w-12 h-12 object-contain"
+          />
+          <span class="text-[0.72rem] font-bold tracking-widest">Tailwind</span>
         </div>
       </div>
-      <div class="project-card reveal reveal-delay-3">
-        <div class="project-coming">
-          <div class="coming-label">Coming Soon</div>
-          <div class="coming-sub">Stay tuned</div>
+
+      <!-- Databases & Tools -->
+      <div class="reveal mb-4">
+        <span class="inline-flex items-center gap-3 mb-6">
+          <span class="font-bebas text-xl text-brown tracking-widest"
+            >Databases & Tools</span
+          >
+          <span class="flex-1 h-px w-16 bg-sand inline-block"></span>
+        </span>
+      </div>
+      <div
+        class="grid grid-cols-3 sm:grid-cols-5 lg:grid-cols-6 *:text-sand gap-4"
+      >
+        <div
+          class="drop-card reveal d1 bg-white border-2 border-ink flex flex-col items-center gap-3 p-5"
+        >
+          <img
+            src="./assets/postgres.svg"
+            alt="PostgreSQL"
+            class="w-12 h-12 object-contain"
+          />
+          <span class="text-[0.72rem] font-bold tracking-widest"
+            >PostgreSQL</span
+          >
+        </div>
+        <div
+          class="drop-card reveal d1 bg-white border-2 border-ink flex flex-col items-center gap-3 p-5"
+        >
+          <img
+            src="./assets/mongo.svg"
+            alt="MongoDB"
+            class="w-12 h-12 object-contain"
+          />
+          <span class="text-[0.72rem] font-bold tracking-widest">MongoDB</span>
+        </div>
+        <div
+          class="drop-card reveal d2 bg-white border-2 border-ink flex flex-col items-center gap-3 p-5"
+        >
+          <img
+            src="./assets/redis.svg"
+            alt="Redis"
+            class="w-12 h-12 object-contain"
+          />
+          <span class="text-[0.72rem] font-bold tracking-widest">Redis</span>
+        </div>
+        <div
+          class="drop-card reveal d2 bg-white border-2 border-ink flex flex-col items-center gap-3 p-5"
+        >
+          <img
+            src="./assets/kafka.svg"
+            alt="Kafka"
+            class="w-12 h-12 object-contain"
+          />
+          <span class="text-[0.72rem] font-bold tracking-widest">Kafka</span>
+        </div>
+        <div
+          class="drop-card reveal d3 bg-white border-2 border-ink flex flex-col items-center gap-3 p-5"
+        >
+          <img
+            src="./assets/docker.svg"
+            alt="Docker"
+            class="w-12 h-12 object-contain"
+          />
+          <span class="text-[0.72rem] font-bold tracking-widest">Docker</span>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ====== CONTACT ====== -->
-  <section id="contact">
-    <div class="section-label reveal">
-      <span class="section-label-num">03 /</span>
-      <h2>Contact</h2>
-      <div class="section-label-line"></div>
+    <!-- ====== QUOTE BANNER ====== -->
+    <div
+      class="divider-banner border-y-[2.5px] border-ink bg-olive py-16 px-10 text-center"
+    >
+      <p
+        class="font-serif italic text-cream mx-auto max-w-3xl"
+        style="font-size: clamp(1.5rem, 4vw, 3rem); line-height: 1.35"
+      >
+        "I don't just write code - I craft
+        <strong class="text-yellow not-italic">experiences</strong> that are
+        fast, bold, and built to last."
+      </p>
     </div>
-    <div class="contact-inner">
-      <div class="contact-left reveal">
-        <h3>Let's build something great together.</h3>
-        <p>Whether you have a project in mind, a question, or just want to say hello — my inbox is always open. I try to
-          get back within 24 hours.</p>
-        <a href="mailto:santoshkc7786@gmail.com" class="contact-email-link">santoshkc7786@gmail.com</a>
+
+    <!-- ====== PROJECTS ====== -->
+    <section id="projects" class="max-w-6xl mx-auto px-10 py-24">
+      <div class="reveal flex items-center gap-4 mb-16">
+        <span class="font-bebas text-base text-orange tracking-[3px]"
+          >02 /</span
+        >
+        <h2
+          class="font-bebas text-ink"
+          style="font-size: clamp(2.5rem, 6vw, 5rem); line-height: 1"
+        >
+          Projects
+        </h2>
+        <div class="flex-1 h-0.5 bg-sand"></div>
       </div>
-      <div class="contact-right reveal reveal-delay-2">
-        <input type="text" class="contact-input" placeholder="Your Name" />
-        <input type="email" class="contact-input" placeholder="Your Email" />
-        <textarea class="contact-input" placeholder="Your Message"></textarea>
-        <button class="contact-submit"><span>Send Message →</span></button>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- E-Gallery -->
+        <div
+          class="drop-card drop-card-lg reveal bg-white border-2 border-ink overflow-hidden"
+        >
+          <div class="overflow-hidden h-56">
+            <img
+              src="https://images.unsplash.com/photo-1730459024772-5eed9b324e90?q=80&w=800&auto=format&fit=crop"
+              alt="E-Gallery"
+              class="w-full h-full object-cover transition-all duration-500 hover:scale-105"
+            />
+          </div>
+          <div class="p-6">
+            <div class="flex flex-wrap gap-2 mb-3">
+              <span
+                class="text-[0.65rem] font-bold tracking-widest bg-yellow border border-rust text-rust px-2 py-0.5 rounded-sm"
+                >Next Js</span
+              >
+              <span
+                class="text-[0.65rem] font-bold tracking-widest bg-yellow border border-rust text-rust px-2 py-0.5 rounded-sm"
+                >MySQL</span
+              >
+              <span
+                class="text-[0.65rem] font-bold tracking-widest bg-yellow border border-rust text-rust px-2 py-0.5 rounded-sm"
+                >Drizzle</span
+              >
+            </div>
+            <h3 class="font-bebas text-3xl text-sand tracking-wide mb-2">
+              E-Gallery
+            </h3>
+            <p class="text-sm leading-relaxed text-gray-500 mb-5">
+              A full-featured digital gallery platform built with Next.js and
+              MySQL. Showcases artwork with smooth navigation and a clean,
+              immersive browsing experience.
+            </p>
+            <a
+              href="#"
+              class="inline-flex items-center gap-2 text-[0.75rem] font-bold tracking-widest text-sand border-b-2 border-orange pb-0.5 no-underline transition-colors hover:text-orange"
+            >
+              <i class="fa-brands fa-github"></i> View Source
+            </a>
+          </div>
+        </div>
+
+        <div
+          class="drop-card drop-card-lg reveal d1 bg-cream border-2 border-ink flex flex-col items-center justify-center min-h-[320px]"
+        >
+          <span class="font-bebas text-4xl text-sand tracking-[3px]"
+            >Coming Soon</span
+          >
+          <span class="text-[0.7rem] font-bold tracking-widest text-sand mt-2"
+            >Next project in progress...</span
+          >
+        </div>
+        <div
+          class="drop-card drop-card-lg reveal d2 bg-cream border-2 border-ink flex flex-col items-center justify-center min-h-[320px]"
+        >
+          <span class="font-bebas text-4xl text-sand tracking-[3px]"
+            >Coming Soon</span
+          >
+          <span class="text-[0.7rem] font-bold tracking-widest text-sand mt-2"
+            >Stay tuned</span
+          >
+        </div>
+        <div
+          class="drop-card drop-card-lg reveal d3 bg-cream border-2 border-ink flex flex-col items-center justify-center min-h-[320px]"
+        >
+          <span class="font-bebas text-4xl text-sand tracking-[3px]"
+            >Coming Soon</span
+          >
+          <span class="text-[0.7rem] font-bold tracking-widest text-sand mt-2"
+            >Stay tuned</span
+          >
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ====== FOOTER ====== -->
-  <footer>
-    <div class="footer-logo">SANTOSH K.C.</div>
-    <div class="footer-copy">© 2025 — Built with obsession.</div>
-    <div class="footer-socials">
-      <a href="https://www.linkedin.com/in/santosh-k-c-b923a2206/" target="_blank"><i
-          class="fa-brands fa-linkedin"></i></a>
-      <a href="https://github.com/itsSantoshkc" target="_blank"><i class="fa-brands fa-github"></i></a>
-      <a href="mailto:santoshkc7786@gmail.com"><i class="fa-solid fa-envelope"></i></a>
-    </div>
-  </footer>
+    <!-- ====== CONTACT ====== -->
+    <section id="contact" class="max-w-6xl mx-auto px-10 py-24">
+      <div class="reveal flex items-center gap-4 mb-16">
+        <span class="font-bebas text-base text-orange tracking-[3px]"
+          >03 /</span
+        >
+        <h2
+          class="font-bebas text-ink"
+          style="font-size: clamp(2.5rem, 6vw, 5rem); line-height: 1"
+        >
+          Contact
+        </h2>
+        <div class="flex-1 h-0.5 bg-sand"></div>
+      </div>
 
-  <script src="script.js">
-  </script>
-</body>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
+        <div class="reveal">
+          <h3
+            class="font-bebas text-ink mb-5"
+            style="font-size: clamp(2rem, 5vw, 4rem); line-height: 1"
+          >
+            Let's build something great together.
+          </h3>
+          <p class="text-sm leading-relaxed text-gray-500 mb-8">
+            Whether you have a project in mind, a question, or just want to say
+            hello - my inbox is always open. I try to get back within 24 hours.
+          </p>
+          <a
+            href="mailto:santoshkc7786@gmail.com"
+            class="font-bebas text-2xl tracking-widest text-ink no-underline border-b-4 border-orange pb-1 transition-colors hover:text-orange"
+          >
+            santoshkc7786@gmail.com
+          </a>
+        </div>
 
+        <div class="reveal d2 flex flex-col gap-4">
+          <input
+            type="text"
+            placeholder="Your Name"
+            class="w-full px-5 py-3.5 text-sm border-2 border-ink bg-white text-ink outline-none placeholder-gray-400 focus:border-orange transition-colors"
+          />
+          <input
+            type="email"
+            placeholder="Your Email"
+            class="w-full px-5 py-3.5 text-sm border-2 border-ink bg-white text-ink outline-none placeholder-gray-400 focus:border-orange transition-colors"
+          />
+          <textarea
+            placeholder="Your Message"
+            rows="5"
+            class="w-full px-5 py-3.5 text-sm border-2 border-ink bg-white text-ink outline-none placeholder-gray-400 focus:border-orange transition-colors resize-y"
+          ></textarea>
+          <button
+            class="submit-btn self-start bg-ink text-cream border-2 border-ink px-9 py-4 text-xs font-bold tracking-[0.15em] transition-colors duration-200"
+          >
+            <span>Send Message →</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====== FOOTER ====== -->
+    <footer
+      class="bg-ink border-t-4 border-orange px-10 py-10 flex flex-col sm:flex-row items-center justify-between gap-5"
+    >
+      <span class="font-bebas text-3xl tracking-[3px] text-cream"
+        >SANTOSH K.C.</span
+      >
+      <span class="text-[0.7rem] tracking-widest text-white/30"
+        >© 2025 - Built with obsession.</span
+      >
+      <div class="flex gap-4">
+        <a
+          href="https://www.linkedin.com/in/santosh-k-c-b923a2206/"
+          target="_blank"
+          class="text-white/40 text-base hover:text-yellow transition-colors"
+          ><i class="fa-brands fa-linkedin"></i
+        ></a>
+        <a
+          href="https://github.com/itsSantoshkc"
+          target="_blank"
+          class="text-white/40 text-base hover:text-yellow transition-colors"
+          ><i class="fa-brands fa-github"></i
+        ></a>
+        <a
+          href="mailto:santoshkc7786@gmail.com"
+          class="text-white/40 text-base hover:text-yellow transition-colors"
+          ><i class="fa-solid fa-envelope"></i
+        ></a>
+      </div>
+    </footer>
+
+    <script>
+      const cursor = document.getElementById("cursor");
+      const follower = document.getElementById("cursorFollower");
+      let mouseX = 0,
+        mouseY = 0,
+        followerX = 0,
+        followerY = 0;
+
+      document.addEventListener("mousemove", (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        cursor.style.left = mouseX + "px";
+        cursor.style.top = mouseY + "px";
+      });
+
+      (function animateFollower() {
+        followerX += (mouseX - followerX) * 0.12;
+        followerY += (mouseY - followerY) * 0.12;
+        follower.style.left = followerX + "px";
+        follower.style.top = followerY + "px";
+        requestAnimationFrame(animateFollower);
+      })();
+
+      document
+        .querySelectorAll("a, button, input, textarea, .drop-card")
+        .forEach((el) => {
+          el.addEventListener("mouseenter", () => {
+            cursor.style.transform = "translate(-50%,-50%) scale(2)";
+            follower.style.transform = "translate(-50%,-50%) scale(1.4)";
+            follower.style.borderColor = "#E07B39";
+          });
+          el.addEventListener("mouseleave", () => {
+            cursor.style.transform = "translate(-50%,-50%) scale(1)";
+            follower.style.transform = "translate(-50%,-50%) scale(1)";
+            follower.style.borderColor = "#5C3D2E";
+          });
+        });
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) e.target.classList.add("visible");
+          });
+        },
+        { threshold: 0.1 },
+      );
+      document
+        .querySelectorAll(".reveal")
+        .forEach((el) => observer.observe(el));
+    </script>
+  </body>
 </html>
